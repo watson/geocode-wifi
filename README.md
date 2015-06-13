@@ -17,24 +17,16 @@ npm install geocode-wifi
 ```js
 var geocodeWifi = require('geocode-wifi')
 
-var towers = [...]
+var towers = [
+  { mac: '0e:1d:41:0c:22:d4', ssid: 'NodeConf', signal: -72 },
+  { mac: '01:1c:ef:0c:21:2a', ssid: 'NSA Lobby', signal: -2 },
+  { mac: 'e0:53:41:92:00:bb', ssid: 'Microsoft Taco', signal: -89 }
+]
 
 geocodeWifi(towers, function (err, location) {
   if (err) throw err
   console.log(location) // => { lat: 38.0690894, lng: -122.8069356, accuracy: 42 }
 })
-```
-
-The array of access points (`towers` in the above example) is just an
-array of simple JavaScript objects - one for each access point. Each
-object should look similar to this:
-
-```js
-{
-  mac: 'e0:1c:41:0c:22:d4',
-  ssid: 'WCAir',
-  signal: -72
-}
 ```
 
 Geocode-wifi have special support for the
