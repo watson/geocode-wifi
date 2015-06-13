@@ -41,10 +41,10 @@ into geocode-wifi:
 var geocodeWifi = require('geocode-wifi')
 var wifiScanner = require('node-wifiscanner')
 
-wifiScanner.scan(function (err, data) {
+wifiScanner.scan(function (err, towers) {
   if (err) throw err
 
-  geocodeWifi(data, function (err, location) {
+  geocodeWifi(towers, function (err, location) {
     if (err) throw err
 
     console.log(location) // => { lat: 38.0690894, lng: -122.8069356, accuracy: 42 }
