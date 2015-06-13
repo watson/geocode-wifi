@@ -2,6 +2,10 @@
 
 Returns a latitude and a longitude given an array of wifi access points.
 
+[![Build status](https://travis-ci.org/watson/geocode-wifi.svg?branch=master)](https://travis-ci.org/watson/geocode-wifi)
+
+[![js-standard-style](https://raw.githubusercontent.com/feross/standard/master/badge.png)](https://github.com/feross/standard)
+
 ## Installation
 
 ```
