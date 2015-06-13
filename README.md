@@ -14,6 +14,9 @@ npm install geocode-wifi
 
 ## Usage
 
+This module needs network access in order to communicate with Google so
+it can triangulate the provided access points.
+
 ```js
 var geocodeWifi = require('geocode-wifi')
 
