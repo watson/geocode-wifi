@@ -1,0 +1,42 @@
+{
+  "name": "geocode-wifi",
+  "version": "0.0.0",
+  "description": "Geocode wifi access points to a latitute and longitude",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && node test.js"
+  },
+  "keywords": [
+    "geo",
+    "geocode",
+    "lat",
+    "latitude",
+    "lng",
+    "long",
+    "longitude",
+    "wifi",
+    "ssid",
+    "mac",
+    "accesspoints",
+    "access points",
+    "triangulate",
+    "NSA"
+  ],
+  "author": "Thomas Watson Steen <w@tson.dk> (https://github.com/watson)",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.57.0"
+  },
+  "devDependencies": {
+    "standard": "^4.2.1",
+    "tape": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/watson/geocode-wifi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/watson/geocode-wifi/issues"
+  },
+  "homepage": "https://github.com/watson/geocode-wifi"
+}
