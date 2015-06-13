@@ -1,6 +1,6 @@
 {
   "name": "geocode-wifi",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Geocode wifi access points to a latitute and longitude",
   "main": "index.js",
   "scripts": {
