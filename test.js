@@ -78,13 +78,9 @@ test('normal array', function (t) {
 })
 
 test('node-wifiscanner array', function (t) {
-  geocodeWifi(towers1, function (err, location1) {
+  geocodeWifi(towers2, function (err, location) {
     t.error(err)
-
-    geocodeWifi(towers2, function (err, location2) {
-      t.error(err)
-      t.deepEqual(location1, location2)
-      t.end()
-    })
+    t.deepEqual(location, { accuracy: 22, lat: 34.3427352, lng: -112.1004473 })
+    t.end()
   })
 })
