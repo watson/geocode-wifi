@@ -1,9 +1,22 @@
 'use strict'
 
 var qs = require('querystring')
-var request = require('request')
+var https = require('https')
+var once = require('once')
+
+var processBody = function (body, cb) {
+  if (body.status !== 'OK') return cb()
+
+  cb(null, {
+    lat: body.location.lat,
+    lng: body.location.lng,
+    accuracy: body.accuracy
+  })
+}
 
 module.exports = function (towers, cb) {
+  cb = once(cb)
+
   var wifi = (towers || []).map(function (tower) {
     var ss = 'signal' in tower ? tower.signal : tower.signal_level
     return qs.escape('mac:' + tower.mac + '|ssid:' + tower.ssid + '|ss:' + ss)
@@ -12,21 +25,31 @@ module.exports = function (towers, cb) {
   if (wifi) wifi = '&wifi=' + wifi
 
   var opts = {
+    hostname: 'maps.googleapis.com',
     method: 'POST',
-    url: 'https://maps.googleapis.com/maps/api/browserlocation/json?browser=firefox&sensor=true' + wifi,
-    json: true
+    path: '/maps/api/browserlocation/json?browser=firefox&sensor=true' + wifi
   }
 
-  request(opts, function (err, res, body) {
-    if (err) return cb(err)
-    if (res.statusCode >= 300) return cb(new Error('Google returned non-2xx status: ' + res.statusCode))
-    if (!body) return cb(new Error('Google didn\'t return any data'))
-    if (body.status !== 'OK') return cb()
+  var req = https.request(opts, function (res) {
+    var buffers = []
+    res.on('data', buffers.push.bind(buffers))
+    res.on('end', function () {
+      if (res.statusCode >= 300) return cb(new Error('Geocoding service returned unexpected status code: ' + res.statusCode))
 
-    cb(null, {
-      lat: body.location.lat,
-      lng: body.location.lng,
-      accuracy: body.accuracy
+      var body = Buffer.concat(buffers)
+
+      try {
+        body = JSON.parse(body)
+      } catch (e) {
+        return cb(e)
+      }
+
+      processBody(body, cb)
     })
   })
+  req.on('error', cb)
+  req.on('close', function () {
+    cb(new Error('Connection to geocoding service closed unexpectedly'))
+  })
+  req.end()
 }
