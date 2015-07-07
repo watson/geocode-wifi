@@ -1,6 +1,6 @@
 {
   "name": "geocode-wifi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Geocode wifi access points to a latitute and longitude",
   "main": "index.js",
   "scripts": {
@@ -38,5 +38,9 @@
   "bugs": {
     "url": "https://github.com/watson/geocode-wifi/issues"
   },
-  "homepage": "https://github.com/watson/geocode-wifi"
+  "homepage": "https://github.com/watson/geocode-wifi",
+  "coordinates": [
+    55.6666517,
+    12.5796562
+  ]
 }
