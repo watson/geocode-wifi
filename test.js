@@ -72,7 +72,13 @@ test('incomplete array', function (t) {
 test('normal array', function (t) {
   geocodeWifi(towers1, function (err, location) {
     t.error(err)
-    t.deepEqual(location, { accuracy: 22, lat: 34.34273700000001, lng: -112.1004467 })
+    t.ok(location.accuracy > 0)
+    t.ok(location.lat >= -90)
+    t.ok(location.lat <= 90)
+    t.ok(location.lat !== 0) // technically a valid value, but most likely an error
+    t.ok(location.lng >= -180)
+    t.ok(location.lng <= 180)
+    t.ok(location.lng !== 0) // technically a valid value, but most likely an error
     t.end()
   })
 })
@@ -80,7 +86,13 @@ test('normal array', function (t) {
 test('node-wifiscanner array', function (t) {
   geocodeWifi(towers2, function (err, location) {
     t.error(err)
-    t.deepEqual(location, { accuracy: 22, lat: 34.34273700000001, lng: -112.1004467 })
+    t.ok(location.accuracy > 0)
+    t.ok(location.lat >= -90)
+    t.ok(location.lat <= 90)
+    t.ok(location.lat !== 0) // technically a valid value, but most likely an error
+    t.ok(location.lng >= -180)
+    t.ok(location.lng <= 180)
+    t.ok(location.lng !== 0) // technically a valid value, but most likely an error
     t.end()
   })
 })
