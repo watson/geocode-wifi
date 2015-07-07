@@ -17,10 +17,13 @@ var processBody = function (body, cb) {
 module.exports = function (towers, cb) {
   cb = once(cb)
 
-  var wifi = (towers || []).map(function (tower) {
-    var ss = 'signal' in tower ? tower.signal : tower.signal_level
-    return qs.escape('mac:' + tower.mac + '|ssid:' + tower.ssid + '|ss:' + ss)
-  }).join('&wifi=')
+  var wifi = (towers || [])
+    .slice(0, 20) // if the URL is too long, Google will repond with 411
+    .map(function (tower) {
+      var ss = 'signal' in tower ? tower.signal : tower.signal_level
+      return qs.escape('mac:' + tower.mac + '|ssid:' + tower.ssid + '|ss:' + ss)
+    })
+    .join('&wifi=')
 
   if (wifi) wifi = '&wifi=' + wifi
 
